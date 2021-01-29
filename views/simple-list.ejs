@@ -1,0 +1,45 @@
+<%- include('./partials/header') %>
+	<main>
+		<div class="list container">
+			<% if (listTitle) { %>
+				<h2><%= listTitle %></h2>
+			<% } %>
+			<div class="row">
+				<% for( let i = 0, val; i < data.length; i++ ) { %>
+					<% val = data[i] %>
+					<div class="col-12 col-md-4 col-lg-3">
+						<a class="tags" href="<%= val %>"><%= val %></a>
+					</div>
+				<% } %>
+			</div>
+		</div>
+		<div class="page-nav text-center my-5">
+			<% if (locals.page){ %>
+				<% current = current<page?parseInt(current):1 %>
+				<% if (current > 1){ %>
+					<a href="<%= url + '/page/1' %>">
+						<i class="material-icons" style="width: 0.3em;">navigate_before</i>
+						<i class="material-icons">navigate_before</i>
+					</a>
+					<a href="<%= url + '/page/' + (current-1) %>">
+						<i class="material-icons">navigate_before</i>
+					</a>
+				<% } %>
+				<% for (let i = current-3; i <= current+3; i++){ %>
+					<% if (i < 1){ continue } else %>
+					<% if (i > page){ break } %>
+					<a class="<%= current==i?'current':'' %>" href="<%= url + '/page/' + i %>"><%= i %></a>
+				<% } %>
+				<% if (current < page){ %>
+					<a href="<%= url + '/page/' + (current+1) %>">
+						<i class="material-icons">navigate_next</i>
+					</a>
+					<a href="<%= url + '/page/' + page %>">
+						<i class="material-icons" style="width: 0.3em;">navigate_next</i>
+						<i class="material-icons">navigate_next</i>
+					</a>
+				<% } %>
+			<% } %> 
+		</div>
+	</main>
+<%- include('./partials/footer') %>

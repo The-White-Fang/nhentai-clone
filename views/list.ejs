@@ -1,0 +1,75 @@
+<%- include('./partials/header') %>
+	<main>
+		<div class="list container">
+			<% if (listTitle) { %>
+				<h2><%= listTitle %></h2>
+			<% } %>
+			<% if (data.length) { %>
+				<% for( let i = 0, hentai; i < data.length; i++ ) { %> 
+					<% hentai = data[i] %> 
+					<div class="list-item row py-3 my-2 rounded">
+						<div class="cover col-12 col-md-3">
+							<img src="/getimage/<%= encodeURIComponent(hentai.cover) %>" alt="">
+						</div>
+						<div class="info col-12 col-md-9 pb-5 pb-md-0">
+							<h4><%= hentai['meta-title'] + hentai.title + hentai['post-title'] %></h4>
+							<table>
+								<tr>
+									<td class="align-top pt-3">Sauce</td>
+									<td class="pt-3">
+										<a class="nhentai d-inline-flex align-items-center" href="https://nhentai.net/g/<%= hentai.sauce %>" target="blank">
+											<img src="https://static.nhentai.net/img/logo.090da3be7b51.svg" alt="">
+											#<%= hentai.sauce %>
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="align-top pt-3">Tags</td>
+									<td class="tags-list d-inline-block pt-3">
+										<% for( let i = 0, tag; i < hentai.tags.length; i++ ) { %>
+											<% tag = hentai.tags[i] %> 
+											<a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
+										<% } %>
+									</td>
+								</tr>
+							</table>
+							<a class="view" href="/sauce/<%= hentai.sauce %>">View</a>
+						</div>
+					</div>
+				<% } %>
+			<% } else { %>
+				<div class="no-results p-5 text-center rounded">
+					No results found.
+				</div>
+			<% } %>
+		</div>
+		<div class="page-nav text-center my-5">
+			<% if (locals.page){ %>
+				<% current = current<page?parseInt(current):1 %>
+				<% if (current > 1){ %>
+					<a href="<%= url + '/page/1' %>">
+						<i class="material-icons" style="width: 0.3em;">navigate_before</i>
+						<i class="material-icons">navigate_before</i>
+					</a>
+					<a href="<%= url + '/page/' + (current-1) %>">
+						<i class="material-icons">navigate_before</i>
+					</a>
+				<% } %>
+				<% for (let i = current-3; i <= current+3; i++){ %>
+					<% if (i < 1){ continue } else %>
+					<% if (i > page){ break } %>
+					<a class="<%= current==i?'current':'' %>" href="<%= url + '/page/' + i %>"><%= i %></a>
+				<% } %>
+				<% if (current < page){ %>
+					<a href="<%= url + '/page/' + (current+1) %>">
+						<i class="material-icons">navigate_next</i>
+					</a>
+					<a href="<%= url + '/page/' + page %>">
+						<i class="material-icons" style="width: 0.3em;">navigate_next</i>
+						<i class="material-icons">navigate_next</i>
+					</a>
+				<% } %>
+			<% } %> 
+		</div>
+	</main>
+<% include('./partials/footer') %>

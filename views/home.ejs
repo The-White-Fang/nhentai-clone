@@ -1,0 +1,65 @@
+<%- include('./partials/header') %>
+	<main>
+		<div class="container-block">
+			<div id="search-block">
+				<form id="search-form" action="/search" method="GET">
+					<div class="search-container">
+						<input type="text" name="search" id="search" placeholder="Type Keywords" autocomplete="off" required>
+						<button class="search-btn">
+							<i class="material-icons">search</i>
+						</button>
+					</div>
+				</form>
+				<form id="filters-form" action="/search" method="POST">
+					<div class="filter-container">
+						<div class="filters container">
+							<div class="row">
+								<div class="col-12 col-md-6">
+									<div class="filter">
+										<input type="text" name="tags" id="tags-input" placeholder="Add tags"
+											autocomplete="off">
+										<ul id="tags-list"></ul>
+									</div>
+								</div>
+								<div class="col-12 col-md-6">
+									<div class="filter">
+										<input type="text" name="characters" id="characters-input"
+											placeholder="Add Characters" autocomplete="off">
+										<ul id="characters-list"></ul>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 col-md-6">
+									<div class="filter">
+										<input type="text" name="parodies" id="parodies-input"
+											placeholder="Add Parodies" autocomplete="off">
+										<ul id="parodies-list"></ul>
+									</div>
+								</div>
+								<div class="col-12 col-md-6">
+									<div class="filter">
+										<select name="category" id="category">
+											<option value>Select category</option>
+											<option value="manga">Manga</option>
+											<option value="doujinshi">Doujinshi</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="actions-block">
+								<button class="reset btn btn-secondary" type="button">Reset</button>
+								<button class="submit btn btn-success">GO</button>
+							</div>
+						</div>
+						<div class="more-options">
+							<div class="dash"></div>
+							<span>More</span>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+	<script src="/js/search.js"></script>
+<%- include('./partials/footer') %>
